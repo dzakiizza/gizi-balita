@@ -1,0 +1,220 @@
+<html lang="en">
+
+<head>
+  <title>Gizi Balita</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- favicons -->
+  <link rel="shortcut icon" type="image" href="../../public/favicon.ico">
+  <!-- icons -->
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://use.fontawesome.com/63abf5d248.js"></script>
+</head>
+
+<body>
+  <svg class="svg-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#0099ff" fill-opacity="0.9" d="M0,160L48,181.3C96,203,192,245,288,266.7C384,288,480,288,576,282.7C672,277,768,267,864,245.3C960,224,1056,192,1152,192C1248,192,1344,224,1392,240L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+  </svg>
+  <h1 class="text-center" id="giziBalitaTitle">Klasifikasi Status Gizi Balita</h1>
+  <div id="mainDiv" class="container-fluid" style="z-index: 999;">
+    <div id="containerForm" class="formDiv container">
+      <form id="inputForm" class="inputForm">
+        <div class="mb-3">
+          <label for="umur" class="form-label input_label">Umur (Bulan)</label>
+          <input type="number" class="form-control" id="umur" name="umur" max="60">
+        </div>
+        <div class="mb-3">
+          <label for="jenisKelamin" class="form-label input_label">Jenis Kelamin</label>
+          <select class="form-select form-select-mb mb-3" aria-label=".form-select-lg example" name="jenisKelamin" id="jenisKelamin">
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="beratBadan" class="form-label input_label">Berat Badan (Kg)</label>
+          <input type="number" class="form-control" id="beratBadan" name="beratBadan" step="0.01" inputmode="decimal">
+        </div>
+        <div class="mb-3">
+          <label for="tinggiBadan" class="form-label input_label">Tinggi Badan (Cm)</label>
+          <input type="number" class="form-control" id="tinggiBadan" name="tinggiBadan" step="0.01" inputmode="decimal">
+        </div>
+        <div class="col text-center">
+          <button id="submit_button" type="submit" class="btn btn-primary btn-lg text-center">Periksa Gizi</button>
+        </div>
+      </form>
+      <div id="hasilKlasifikasi" class="container text-center displayNone">
+        <p class="text-center text-standard"><b>Standar Antropometri</b> Anak digunakan untuk menilai atau menentukan status gizi anak. Penilaian status gizi Anak dilakukan dengan membandingkan
+          hasil pengukuran berat badan dan panjang/tinggi badan dengan Standar Antropometri Anak.
+        <h1 style="padding: 10px;" class="text-center">Hasil : </h1>
+        <div class=" row">
+          <div class="col">
+            <h2>BB/U</h2>
+            <h5 id="hasilbb"></h5>
+          </div>
+          <div class="col">
+            <h2>TB/U</h2>
+            <h5 id="hasiltb"></h5>
+          </div>
+          <div class="col">
+            <h2>IMT/U</h2>
+            <h5 id="hasilimt"></h5>
+          </div>
+          <div class="text-center" style="margin: 3.5rem auto;">
+            <button id="back_button" type="submit" class="btn btn-primary btn-lg text-center">Kembali</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer" class="footer-area wow fadeIn">
+    <div class="container" style="padding: 60px 0;">
+      <div class="content-inside">
+        <div class="row content-footer">
+          <div class="col-md-4">
+            <div class="footer-info padding">
+              <h3>CONTACT US</h3>
+              <a href="https://www.google.com/maps/dir/-6.1456444,106.8296488/puskesmas+sawah+besar/@-6.1393218,106.8264328,17.5z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x2e69f5f85beedeb1:0x9f90bac929c0b617!2m2!1d106.8270597!2d-6.1378328">
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i>Jl. Mangga Dua Dalam K No.13, RT.1/RW.12,Mangga Dua Sel., Kecamatan Sawah Besar, Jakara Pusat, Daerah Khusus Ibukota Jakarta 10730</p>
+              </a>
+              <p><i class="fa fa-paper-plane" aria-hidden="true"></i> puskesmaskecsawahbesar@jakarta.go.id</p>
+              <p><i class="fa fa-phone" aria-hidden="true"></i>021 6256101</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-info padding">
+              <h3>HOTLINE PUSKESMAS SAWAH BESAR</h3>
+              <a href="https://api.whatsapp.com/send?phone=6285817102104">
+                <p><i class="fa fa-whatsapp" aria-hidden="true"></i>0858-1710-2104</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-info padding">
+              <h3>HOTLINE COVID-19 PUSKESMAS SAWAH BESAR</h3>
+              <a href="https://api.whatsapp.com/send?phone=6281389729090">
+                <p><i class="fa fa-whatsapp" aria-hidden="true"></i>0813-8972-9090</p>
+              </a>
+            </div>
+          </div>
+          <div class="hotline-vaksin col-md-4">
+            <div class="footer-info padding">
+              <h3>HOTLINE VAKSINASI COVID-19 PUSKESMAS SAWAH BESAR</h3>
+              <a href="https://api.whatsapp.com/send?phone=6281231331907">
+                <p><i class="fa fa-whatsapp" aria-hidden="true"></i>0812-3133-1907</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright-area wow fadeIn">
+      <div class="container">
+        <div class="content-social">
+          <div class="col-md-8">
+            <div class="footer-text">
+              <p>© 2021 Puskesmas Kecamatan Sawah Besar. All Rights Reserved.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="social">
+              <ul class="social-links">
+                <li><a href="https://www.facebook.com/puskesmassawahbesar/"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UCk8WtfAc8vsqDOij3KlOy8Q"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="https://www.instagram.com/puskesmaskecamatansawahbesar/"><i class="fa fa-instagram"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    var numberInputs = document.querySelectorAll('input[type="number"]');
+    for (var i = 0; i < numberInputs.length; i++) {
+      numberInputs[i].onblur = function() {
+        this.value = this.value.replace(',', '.');
+      }
+    }
+    document.getElementById("submit_button").addEventListener("click", function(e) {
+      var umur = document.getElementById("umur").value;
+      var jenisKelamin = document.getElementById("jenisKelamin").value;
+      var beratBadan = document.getElementById("beratBadan").value;
+      var tinggiBadan = document.getElementById("tinggiBadan").value;
+
+      if (umur == "" || jenisKelamin == "" || beratBadan == "" || tinggiBadan == "") {
+        e.preventDefault()
+        alert('Tidak boleh ada yang kosong')
+      } else {
+        e.preventDefault()
+
+        let data = {
+          umur: umur,
+          gender: jenisKelamin,
+          weight: beratBadan,
+          height: tinggiBadan
+        }
+        async function _postData(url = '', data = {}) {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(data)
+          });
+
+          return response.json();
+        }
+        _postData('/api/v1/giziBalita', data)
+          .then(json => {
+            var hasilKlasifikasi = document.getElementById("hasilKlasifikasi");
+            var mainDiv = document.getElementById("mainDiv");
+            var inputForm = document.getElementById("inputForm")
+
+            document.getElementById("hasilbb").innerText = json.data.bb_u
+            document.getElementById("hasiltb").innerText = json.data.pb_u
+            document.getElementById("hasilimt").innerText = json.data.imt_u
+
+            console.log(json)
+
+            inputForm.classList.add("displayNone")
+
+            // mainDiv.classList.add("displayNone");
+            hasilKlasifikasi.classList.remove("displayNone")
+
+            document.getElementById("back_button").addEventListener("click", function(e) {
+              // mainDiv.classList.remove("displayNone");
+              window.location.href = "/"
+            })
+
+            console.log(json.data) // Handle success
+          })
+          .catch(err => {
+            if (umur > 60) {
+              alert('Umur tidak bisa lebih dari 60 bulan')
+            } else if (err) {
+              alert("Terjadi kesalahan")
+            }
+            console.log(err)
+          });
+
+      }
+
+    });
+  </script>
+</body>
+
+</html>
